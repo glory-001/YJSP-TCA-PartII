@@ -1,0 +1,46 @@
+notes: 
+    be THROUGH --> learn your TCA materials (narloy-z) and how parts interface with each other
+    make copies of all files and clean them up with comments and shit
+
+values going out of range for coolprops
+heat flux looking Wrong (but nice channel geometries) 
+export geometries as nice csv with heat flux
+how to smooth out channel geometries into a realistic channel
+peak at around 120k W/m^2
+
+
+change everything to SI (contour is in inches) 
+
+fin efficiency to correct for fins existing (so we can continue analyzing in 1d)
+in root solving, bound temperature of hot wall and cool wall for the geometry configuration
+basically manually iterating through optimal geometry
+keep the geometries constant
+f1 and f2 should be 0
+you don't need to solve for cw at the same time bc cw is dep on hw
+wtf to put on the presentation --> esp if i'm not able to get perf results 
+
+
+NOMINAL VALUES (except for N)
+channel_range = np.linspace(100, 100, 1) # N
+height_range = np.linspace(0.00635, 0.00635, 1) # h 0.00635 in m
+width_range = np.linspace(0.00158, 0.00158, 1) # w 0.00158 in m
+
+
+
+THINGS TO DO: 
+
+- note how pressure drops are weird at the moment --> otherwise you'd put a pressure drop graph
+- heat flux graph and channel geometry graph
+- determine nominal width and number of channels reasoning --> maybe highest heat flux? 
+- put everything on github lmao --> can refer to it during presentation
+- export geometry and heat flux values to excel
+
+# cols are Z (0), R (1), Area (2), Circum (3)
+        # rows are injector face (0), comb end (1), throat (2), nozzle end (3)
+        keypts = np.array([data[0], data[399], data[1596], data[2094]])
+        new = np.zeros((4,2))
+        keypts = np.concatenate((keypts, new), axis = 1)
+        keypts[:,2] = np.pi * (keypts[:,1]**2)
+        keypts[:,3] = np.pi * 2 * keypts[:,1]
+        self.keypts = keypts
+ABOVE CODE --- placed in nasaCEA.py getEngineProps as a helper function for key points in contour except i never used it
